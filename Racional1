@@ -1,0 +1,58 @@
+#pragma once
+#include<iostream>
+#include<math.h>
+
+class Rational {
+	int numerator; //числитель
+	int denominator; // знаменатель
+public:
+	Rational() : numerator(1), denominator(2) {}   //конструктор по умолчанию 
+	Rational(int _numerator, int _denominator) : numerator(_numerator), denominator(_denominator) {} //инициализация 
+	Rational(const Rational& drob) : numerator(drob.numerator), denominator(drob.denominator) {}//копирование
+
+	//функция сложения дробей
+	Rational Add(const Rational& drob2) { //создаём вторую дробь для сложения
+		Rational res;
+		res.numerator = (this->numerator) * (drob2.denominator) + drob2.numerator * (this->denominator);
+		res.denominator = (this->denominator) * (drob2.denominator);
+		return res;
+	}
+	//вычитание 
+	Rational Diff(const Rational& drob2) {
+		Rational res;
+		res.numerator = (this->numerator) * (drob2.denominator) - drob2.numerator * (this->denominator);
+		res.denominator = (this->denominator) * (drob2.denominator);
+		return res;
+	}
+	//умножение
+	Rational Mult(const Rational& drob2) { //создаём вторую дробь для сложения
+		Rational res;
+		res.numerator = (this->numerator) * (drob2.numerator);
+		res.denominator = (this->denominator) * (drob2.denominator);
+		return res;
+	}
+	//деление
+	Rational Div(const Rational& drob2) { //создаём вторую дробь для сложения
+		Rational res;
+		res.numerator = (this->numerator) * (drob2.denominator);
+		res.denominator = (this->denominator) * (drob2.numerator);
+		return res;
+	}
+	//сокращение
+	Rational Sokr() {
+		Rational res;
+		int num = numerator;
+		if (numerator >= denominator)
+			num = denominator;
+		res.numerator = this->numerator;
+		res.denominator = this->denominator;
+		for (int i = 2; i < num; i++) {
+			res.numerator = (this->numerator) / i;
+			res.denominator = (this->denominator) / i;
+		}
+		return res;
+	}
+	void print() { //выводим на экран
+		std::cout << (this->numerator) << "/" << (this->denominator);
+	}
+};
